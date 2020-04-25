@@ -22,7 +22,7 @@ const StyledFooter = styled.footer`
 `;
 
 const Footer = () => (
-    <StyledFooter className="container has-text-centered">
+    <StyledFooter className="has-text-centered">
         <a
             target="__blank"
             className="is-size-2"
