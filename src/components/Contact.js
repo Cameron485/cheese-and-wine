@@ -43,7 +43,7 @@ export default class Index extends React.Component {
     };
 
     render() {
-        const { drawful, fibbage, quiplash } = this.state;
+        const { drawful, quiplash } = this.state;
         return (
             <form
                 name="contact"
@@ -66,12 +66,9 @@ export default class Index extends React.Component {
                     cooking a sunday roast
                 </p>
                 <p>
-                    <b>Fibbage:</b> Flat earth, Trump injecting bleach, Hitler
-                    cooking a sunday roast
-                </p>
-                <p>
-                    <b>Quiplash:</b> Flat earth, Trump injecting bleach, Hitler
-                    cooking a sunday roast
+                    <b>Quiplash:</b> Make _____ great again, I'd rather ____
+                    than play Davie's quiz again, What's there a ton of in
+                    heaven?
                 </p>
                 <div className="field">
                     <label className="label" htmlFor="name">
@@ -83,21 +80,6 @@ export default class Index extends React.Component {
                                 name="drawful"
                                 onChange={this.handleChange}
                                 id="drawful"
-                                required
-                            />
-                        </div>
-                    </label>
-                </div>
-                <div className="field">
-                    <label className="label" htmlFor="name">
-                        Enter a prompt for Fibbage
-                        <div className="control">
-                            <textarea
-                                className="textarea"
-                                type="text"
-                                name="fibbage"
-                                onChange={this.handleChange}
-                                id="fibbage"
                                 required
                             />
                         </div>
@@ -119,7 +101,7 @@ export default class Index extends React.Component {
                     </label>
                 </div>
                 <div className="field">
-                    {!drawful && !fibbage && !quiplash ? (
+                    {!drawful && !quiplash ? (
                         <p className="has-text-centered">
                             <b>
                                 Please fill in at least one of the above prompts
@@ -127,7 +109,7 @@ export default class Index extends React.Component {
                         </p>
                     ) : (
                         <button
-                            disabled={!drawful && !fibbage && !quiplash}
+                            disabled={!drawful && !quiplash}
                             className="button is-link"
                             type="submit"
                         >
