@@ -81,7 +81,6 @@ export default class Index extends React.Component {
                                 name="drawful"
                                 onChange={this.handleChange}
                                 id="drawful"
-                                required
                             />
                         </div>
                     </label>
@@ -96,7 +95,6 @@ export default class Index extends React.Component {
                                 name="quiplash"
                                 onChange={this.handleChange}
                                 id="quiplash"
-                                required
                             />
                         </div>
                     </label>
