@@ -17,12 +17,17 @@ const StyledHeader = styled.header`
 `;
 
 const Description = styled.p`
+    padding-right: 0.75rem;
     font-size: 1.2rem;
     align-self: center;
 
     @media (max-width: ${breakPoints.tablet}px) {
         font-size: 1.5rem;
     }
+`;
+
+const StyledNavbar = styled.div`
+    height: 100%;
 `;
 
 const Header = () => {
@@ -33,7 +38,7 @@ const Header = () => {
             role="navigation"
             aria-label="main-navigation"
         >
-            <div className="navbar-brand">
+            <StyledNavbar className="navbar-brand">
                 <Link className="navbar-item" to="/">
                     <span aria-label="cheese" role="img">
                         🧀
@@ -44,7 +49,7 @@ const Header = () => {
                     </span>
                 </Link>
                 <Description>{description}</Description>
-            </div>
+            </StyledNavbar>
         </StyledHeader>
     );
 };
