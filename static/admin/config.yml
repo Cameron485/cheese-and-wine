@@ -1,0 +1,42 @@
+backend:
+  name: git-gateway
+  branch: master
+  commit_messages:
+    create: 'Create {{collection}} “{{slug}}”'
+    update: 'Update {{collection}} “{{slug}}”'
+    delete: 'Delete {{collection}} “{{slug}}”'
+    uploadMedia: '[skip ci] Upload “{{path}}”'
+    deleteMedia: '[skip ci] Delete “{{path}}”'
+
+media_folder: static/img
+public_folder: /img
+
+collections:
+  - name: "people"
+    label: "People"
+    identifier_field: name
+    folder: "src/pages/people"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Template Key", name: "templateKey", widget: "hidden", default: "people-page"}
+      - {label: "Name", name: "name", widget: "string"}
+      - {label: "Featured Image", name: "image", widget: image}
+      - {label: "About", name: "about", widget: "text"}
+      - {label: "Profession", name: "profession", widget: string}
+      - {label: "Qualifications", name: "qualifications", widget: string}
+      - {label: "Role", name: "role", widget: string}
+      - {label: "Projects", name: "projects", widget: "relation", multiple: true, collection: "projects", searchFields: ["title"], valueField: "title", displayFields: "title"}
+      - {label: "Body", name: "body", widget: "markdown"}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+  - name: "pages"
+    label: "Pages"
+    files:
+      - file: "src/pages/index.md"
+        label: "Landing Page"
+        name: "index"
+        fields:
+          - {label: "Template Key", name: "templateKey", widget: "hidden", default: "landing-page"}
+          - {label: Title, name: title, widget: string}
+          - {label: "Page Description", name: description, widget: string}

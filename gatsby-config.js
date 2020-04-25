@@ -1,0 +1,128 @@
+const { createProxyMiddleware } = require('http-proxy-middleware');
+
+module.exports = {
+    siteMetadata: {
+        title: 'Cheese and Wine',
+        siteUrl: `https://cheese-and-wine.netlify.com`,
+        description: `Welcome to Cheese and Wine. Dining and 69ing optional`,
+        image: `/img/new-landing-page-2`,
+        titleTemplate: `%s · Cheese and Wine`,
+    },
+    developMiddleware: (app) => {
+        app.use(
+            '/.netlify/functions/',
+            createProxyMiddleware({
+                target: 'http://localhost:9000',
+                pathRewrite: {
+                    '/.netlify/functions/': '',
+                },
+            })
+        );
+    },
+    plugins: [
+        'gatsby-plugin-sitemap',
+        'gatsby-plugin-robots-txt',
+        'gatsby-plugin-react-helmet',
+        'gatsby-plugin-sass',
+        {
+            resolve: 'gatsby-plugin-styled-components',
+        },
+        {
+            // keep as first gatsby-source-filesystem plugin for gatsby image support
+            resolve: 'gatsby-source-filesystem',
+            options: {
+                path: `${__dirname}/static/img`,
+                name: 'uploads',
+            },
+        },
+        {
+            resolve: 'gatsby-source-filesystem',
+            options: {
+                path: `${__dirname}/static/files`,
+                name: 'files',
+            },
+        },
+        {
+            resolve: 'gatsby-source-filesystem',
+            options: {
+                path: `${__dirname}/src/pages`,
+                name: 'pages',
+            },
+        },
+        {
+            resolve: 'gatsby-source-filesystem',
+            options: {
+                path: `${__dirname}/src/img`,
+                name: 'images',
+            },
+        },
+        'gatsby-plugin-sharp',
+        'gatsby-transformer-sharp',
+        {
+            resolve: 'gatsby-transformer-remark',
+            options: {
+                plugins: [
+                    {
+                        resolve: 'gatsby-remark-relative-images',
+                        options: {
+                            name: 'uploads',
+                        },
+                    },
+                    {
+                        resolve: 'gatsby-remark-images',
+                        options: {
+                            // It's important to specify the maxWidth (in pixels) of
+                            // the content container as this plugin uses this as the
+                            // base for generating different widths of each image.
+                            maxWidth: 2048,
+                        },
+                    },
+                    {
+                        resolve: 'gatsby-remark-copy-linked-files',
+                        options: {
+                            destinationDir: 'static',
+                        },
+                    },
+                ],
+            },
+        },
+        {
+            resolve: `gatsby-plugin-manifest`,
+            options: {
+                name: `Cheese and Wine`,
+                short_name: `C&W`,
+                icon: `src/img/manifest-logo.png`,
+                description: `Cheese and Wine Time.`,
+                start_url: `/`,
+                background_color: `#2837d6`,
+                theme_color: `#2837d6`,
+                display: `standalone`,
+            },
+        },
+        {
+            resolve: 'gatsby-plugin-netlify-cms',
+            options: {
+                modulePath: `${__dirname}/src/cms/cms.js`,
+            },
+        },
+        {
+            resolve: 'gatsby-plugin-prefetch-google-fonts',
+            options: {
+                fonts: [
+                    {
+                        family: 'Open Sans',
+                        variants: ['400'],
+                    },
+                ],
+            },
+        },
+        {
+            resolve: 'gatsby-plugin-purgecss', // purges all unused/unreferenced css rules
+            options: {
+                develop: true, // Activates purging in npm run develop
+                purgeOnly: ['/all.sass'], // applies purging only on the bulma css file
+            },
+        }, // must be after other CSS plugins
+        'gatsby-plugin-netlify', // make sure to keep it last in the array
+    ],
+};
