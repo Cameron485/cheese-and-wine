@@ -43,7 +43,6 @@ const Header = () => {
                     <span aria-label="cheese" role="img">
                         🧀
                     </span>
-                    +
                     <span aria-label="wine" role="img">
                         🍷
                     </span>
